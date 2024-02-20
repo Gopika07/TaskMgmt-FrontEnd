@@ -1,0 +1,42 @@
+<form [formGroup]="signupForm" (ngSubmit)="signUp(signupForm)">
+<div class="signup-container">
+    <div class="input-container">
+        <label for="email">Email:</label>
+        <input formControlName="email" type="email" placeholder="email">
+        <div class="errorlabel" *ngIf="signupForm.get('email')?.errors?.['required'] && (signupForm.get('email')?.touched || submitted)">
+            email is required!
+        </div>
+        <div class="errorlabel" *ngIf="signupForm.get('email')?.errors?.['email'] && (signupForm.get('email')?.touched || submitted)">email has to be of form example@example.com</div>
+        <label for="password">Password:</label>
+        <input formControlName="password" type="password" placeholder="password" >
+        <div class="errorlabel" *ngIf="signupForm.get('password')?.errors?.['required'] && (signupForm.get('password')?.touched || submitted)">
+            password is required!
+        </div>
+        <div class="errorlabel" *ngIf="signupForm.get('password')?.touched && (signupForm.get('password')?.errors?.['minlength'] || signupForm.get('password')?.errors?.['maxlength'])">
+            password length has to be between 6 and 20!
+        </div>
+        <label for="name">Name:</label>
+        <input formControlName="name" type="text" placeholder="Name">
+        <div class="errorlabel" *ngIf="signupForm.get('name')?.errors?.['required'] && (signupForm.get('name')?.touched || submitted)">
+            name is required!
+        </div>
+        <div class="errorlabel" *ngIf="signupForm.get('name')?.touched && (signupForm.get('name')?.errors?.['minlength'] || signupForm.get('password')?.errors?.['maxlength'])">
+            name length has to be between 3 and 20!
+        </div>
+        <label for="groupName">Group Name:</label>
+        <input formControlName="groupName" type="text" placeholder="Group Name">
+        <div class="errorlabel" *ngIf="signupForm.get('groupName')?.errors?.['required'] && (signupForm.get('groupName')?.touched || submitted)">
+            group name is required!
+        </div>
+        <div class="errorlabel" *ngIf="signupForm.get('groupName')?.touched && signupForm.get('groupName')?.errors?.['minlength'] || signupForm.get('password')?.errors?.['maxlength']">
+            group name length has to be between 3 and 20!
+        </div>
+        <label for="referralCode">Referral Code(Optional):</label>
+        <input formControlName="referralCode" type="text" placeholder="Referral Code">
+    </div>
+    <div class="bttn-container">
+        <button type="submit">submit</button>
+    </div>
+    <div class="errorlabel" *ngIf="err">{{error}}</div>
+</div>
+</form>

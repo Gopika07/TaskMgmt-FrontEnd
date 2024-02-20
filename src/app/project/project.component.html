@@ -1,0 +1,17 @@
+<table>
+    <thead>
+      <tr>
+        <th>Project Id</th>
+        <th>Project Name</th>
+        <th>Project Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">
+        <td>{{ project.projectId }}</td>
+        <td>{{ project.projectName }}</td>
+        <td>{{ project.projectDescription }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

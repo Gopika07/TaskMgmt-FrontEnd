@@ -1,0 +1,4 @@
+error handling in signup like login
+look at all the errors that can occur
+does group name during signup have to be string? - error
+email has no structure validation

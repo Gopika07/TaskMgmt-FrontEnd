@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+.errorlabel {
+    color: red;
+    font-size: 14px;
+  }
+
+  body{
+    background-color: #151931;
+  }
+
+  input{
+    background-color: #3d3f5b;
+    color: #c8b39e;
+  }
+
+  button{
+    background-color: #c8b39e;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #84725e;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #84725e;
+  color: #c8b39e;
+  padding: 8px;
+  text-align: center;
+}
+
+td {
+  background-color: #3d3f5b;
+}
+
+th {
+  background-color: #252841;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #c8b39e;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #84725e;
+  border-radius: 3px;
+  box-sizing: border-box;
+}

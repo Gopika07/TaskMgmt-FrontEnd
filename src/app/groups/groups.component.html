@@ -1,0 +1,31 @@
+<form [formGroup]="addGroup" class="add-group" (ngSubmit)="addGroups(addGroup)">
+  <button (click)="addField()" *ngIf="!add">Add Group</button>
+  <div class="modal" *ngIf="add">
+    <div class="modal-content">
+    <label>Group Name:</label>
+    <input formControlName="groupName" for="group" type="text" required minlength="3" maxlength="20">
+    <div class="errorlabel" *ngIf="addGroup.get('groupName')?.errors?.['required'] &&  submitted">Group Name is required</div>
+    <div class="errorlabel" *ngIf="(addGroup.get('groupName')?.errors?.['maxlength'] || addGroup.get('groupName')?.errors?.['minlength']) && submitted">Group Name has to be between 3 and 20</div>
+    <button type="submit">Add</button>
+    <button type="button" (click)="closeModal()">Close</button>
+  </div>
+  </div>
+</form>
+<table>
+    <thead>
+      <tr>
+        <th>Group Id</th>
+        <th>Group Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let group of groups">
+        <tr>
+          <td>{{ group.groupId }}</td>
+          <td>{{ group.groupName }}</td>
+          <td><button (click)="gotoProjects(group.groupId)">Get Projects</button></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>

@@ -21,6 +21,6 @@ export class GroupService {
     const body = {
       groupName: groupName,
     };
-    return this.httpClient.post(addGroup, body, { responseType: 'text' });
+    return this.httpClient.post(addGroup, body);
   }
 }

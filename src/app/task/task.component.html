@@ -1,0 +1,47 @@
+<form [formGroup]="addTask" class="add-task" (ngSubmit)="addTasks(addTask)">
+    <button (click)="addField()" *ngIf="!add">Add Task</button>
+    <div class="modal" *ngIf="add">
+      <div class="modal-content">
+      <label>Task description:</label>
+      <input formControlName="description" for="task" type="text" required minlength="3" maxlength="20">
+      <div class="errorlabel" *ngIf="addTask.get('description')?.errors?.['required'] &&  submitted">Task description is required</div>
+      <div class="errorlabel" *ngIf="(addTask.get('description')?.errors?.['maxlength'] || addTask.get('description')?.errors?.['minlength']) && submitted">Task description has to be between 3 and 20</div>
+      <label>Due Date(yyyy-mm-dd):</label>
+      <input formControlName="dueDate" for="task" type="text" required minlength="3" maxlength="20">
+      <!-- <div class="errorlabel" *ngIf="addTask.get('dueDate')?.errors?.['required'] &&  submitted">Due date is required</div>
+      <div class="errorlabel" *ngIf="(addTask.get('dueDate')?.errors?.['maxlength'] || addTask.get('dueDate')?.errors?.['minlength']) && submitted">Project Name has to be between 3 and 20</div> -->
+      <label>Assignee Mail:</label>
+      <input formControlName="assigneeMail" for="project" type="text" required minlength="3" maxlength="20">
+      <!-- <div class="errorlabel" *ngIf="addTask.get('projectName')?.errors?.['required'] &&  submitted">Group Name is required</div>
+      <div class="errorlabel" *ngIf="(addTask.get('projectName')?.errors?.['maxlength'] || addTask.get('projectName')?.errors?.['minlength']) && submitted">Project Name has to be between 3 and 20</div> -->
+      <label>Current Status Id:</label>
+      <input formControlName="currentStatusId" for="project" type="text" required minlength="3" maxlength="20">
+      <!-- <div class="errorlabel" *ngIf="addTask.get('projectDescription')?.errors?.['required'] &&  submitted">Group Name is required</div>
+      <div class="errorlabel" *ngIf="(addTask.get('projectDescription')?.errors?.['maxlength'] || addTask.get('projectDescription')?.errors?.['minlength']) && submitted">Project Name has to be between 3 and 20</div> -->
+      <button type="submit">Add</button>
+      <button type="button" (click)="closeModal()">Close</button>
+    </div>
+    </div>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Task Id</th>
+        <th>Task Description</th>
+        <th>Due Date</th>
+        <th>Assignee Mail</th>
+        <th>Current Status Id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.taskId }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.dueDate }}</td>
+        <td>{{ task.assignee }}</td>
+        <td>{{ task.currentStatus }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

@@ -10,6 +10,8 @@ import { RequestInterceptor } from './request.interceptor';
 import { LoginComponent } from './login/login.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ProjectComponent } from './project/project.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ProjectComponent } from './project/project.component';
     SignupComponent,
     LoginComponent,
     GroupsComponent,
-    ProjectComponent
+    ProjectComponent,
+    SpinnerComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

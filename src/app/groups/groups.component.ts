@@ -47,10 +47,15 @@ export class GroupsComponent implements OnInit {
 
   addGroups(form: FormGroup){
     this.service.addGroup(form.value.groupName).subscribe(
-      response => console.log(response)
+      response => {console.log(response);
+      this.service.getGroups().subscribe(
+        (updatedGroups) => {
+          this.groups = updatedGroups;
+        }
+      );
+      }
     );
     this.submitted = true;
     this.add = false;
-    window.onload;
   }
 }

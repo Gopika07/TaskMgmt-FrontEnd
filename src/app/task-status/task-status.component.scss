@@ -1,0 +1,22 @@
+.container{
+    width: 70%;
+    margin: 0 auto;
+}
+
+form{
+    width: 50%;
+    margin: auto;
+    padding: 50px;
+}
+
+form button{
+    margin-left: 2px;
+}
+
+.statusColor{
+    display: flex;
+    justify-items: center;
+    margin: 0 auto;
+    height: 50px;
+    width: 50px;
+}

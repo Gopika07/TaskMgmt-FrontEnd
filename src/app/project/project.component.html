@@ -1,22 +1,40 @@
-<form [formGroup]="addProject" class="add-project" (ngSubmit)="addProjects(addProject)">
+.top-container
+<form
+  [formGroup]="addProject"
+  class="add-project"
+  (ngSubmit)="edit ? getEditProject(addProject) : addProjects(addProject)">
   <button (click)="addField()" *ngIf="!add">Add Project</button>
+
   <div class="modal" *ngIf="add">
     <div class="modal-content">
-    <label>Project Name:</label>
-    <input formControlName="projectName" for="project" type="text" required minlength="3" maxlength="20">
-    <div class="errorlabel" *ngIf="addProject.get('projectName')?.errors?.['required'] &&  submitted">Group Name is required</div>
-    <div class="errorlabel" *ngIf="(addProject.get('projectName')?.errors?.['maxlength'] || addProject.get('projectName')?.errors?.['minlength']) && submitted">Project Name has to be between 3 and 20</div>
-    <label>Project Description:</label>
-    <input formControlName="projectDescription" for="project" type="text" required minlength="3" maxlength="20">
-    <div class="errorlabel" *ngIf="addProject.get('projectDescription')?.errors?.['required'] &&  submitted">Group Name is required</div>
-    <div class="errorlabel" *ngIf="(addProject.get('projectDescription')?.errors?.['maxlength'] || addProject.get('projectDescription')?.errors?.['minlength']) && submitted">Project Name has to be between 3 and 20</div>
-    <button type="submit">Add</button>
-    <button type="button" (click)="closeModal()">Close</button>
-  </div>
+      <label>Project Name:</label>
+      <input formControlName="projectName" for="project" type="text" required minlength="3" maxlength="20"/>
+      <div class="errorlabel" *ngIf="addProject.get('projectName')?.errors?.['required'] &&  submitted">
+        Project Name is required
+      </div>
+      <div class="errorlabel" *ngIf="(addProject.get('projectName')?.errors?.['maxlength'] || addProject.get('projectName')?.errors?.['minlength']) && submitted">
+        Project Name has to be between 3 and 20
+      </div>
+      <label>Project Description:</label>
+      <input formControlName="projectDescription" for="project" type="text" required minlength="3" maxlength="20"/>
+      <div class="errorlabel" *ngIf="addProject.get('projectDescription')?.errors?.['required'] &&  submitted">
+        Project description is required
+      </div>
+      <div class="errorlabel" *ngIf="(addProject.get('projectDescription')?.errors?.['maxlength'] || addProject.get('projectDescription')?.errors?.['minlength']) && submitted">
+        Project description has to be between 3 and 20
+      </div>
+      <button type="submit">Add</button>
+      <button type="button" (click)="closeModal()">Close</button>
+    </div>
   </div>
 </form>
 
-<table>
+<div class="search">
+  <input type="text" [(ngModel)]="searchText" placeholder="Search">
+</div>
+ 
+<div *ngIf="!display">
+  <table *ngIf="(projects | filter: searchText).length > 0">
     <thead>
       <tr>
         <th>Project Id</th>
@@ -26,12 +44,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let project of projects">
-        <td>{{ project.projectId }}</td>
-        <td>{{ project.projectName }}</td>
+      <tr *ngFor="let project of projects | filter: searchText; let i = index">
+        <td>{{ project.projectId}}</td>
+        <td>{{ project.projectName | titlecase}}</td>
         <td>{{ project.projectDescription }}</td>
-        <td><button type="button" (click)="GoToTasks(project.projectId)">See Tasks</button></td>
+        <td>
+          <button type="button" (click)="GoToTasks(project.projectId)">Tasks</button>
+          <button type="button" (click)="deleteProject(project.projectId)">Delete</button>
+          <button type="button" (click)="editProject(project.projectId)">Edit</button>
+          <button type="button" (click)="cloneProject(project.projectId)">Clone</button>
+        </td>
       </tr>
     </tbody>
   </table>
-  
+
+  <div class="pageination">
+    <button (click)="loadPage(currentPage - 1)" [disabled]="firstPage">
+      prev
+    </button>
+    <button (click)="loadPage(currentPage + 1)" [disabled]="!arePagesAvailable">
+      next
+    </button>
+  </div>
+</div>
+
+<ng-container *ngIf="display">
+  <h2 class="noDisplay">{{ noProjectToDisplay }}</h2>
+</ng-container>
+
+<router-outlet></router-outlet>

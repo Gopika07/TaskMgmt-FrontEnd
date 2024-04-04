@@ -3,6 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from '../project/project.component';
 
+export interface ProjectResponse{
+  page: Project[];
+  arePagesAvailable: boolean;
+  totalPages: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +17,10 @@ export class ProjectService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProjects(groupId: number){
+  getProjects(groupId: number, pageIndex: number, pageSize: number):Observable<ProjectResponse>{
     this.groupId = groupId
-    const projectApi = `https://localhost:7197/api/groups/${groupId}/projects`
-      return this.httpClient.get(projectApi) as Observable<Project[]>;
+    const projectApi = `https://localhost:7197/api/groups/${groupId}/projects?pageIndex=${pageIndex}&pageSize=${pageSize}`
+      return this.httpClient.get<ProjectResponse>(projectApi);
   }
 
   addProjects(projectName: string, projectDescription: string){
@@ -41,5 +47,29 @@ export class ProjectService {
       referralCode: referralCode
     }
     return this.httpClient.post(enrollUserToGroupApi, body);
+  }
+
+  deleteProject(projectId: number){
+    const deleteProjectApi = `https://localhost:7197/api/groups/${this.groupId}/projects/${projectId}`
+    return this.httpClient.delete(deleteProjectApi, { responseType: 'text'});
+  }
+
+  editProject(projectId: number, projectName: string, projectDescription: string){
+    const editProjectApi = `https://localhost:7197/api/groups/${this.groupId}/projects/${projectId}`;
+    const body = {
+      projectName: projectName,
+      projectDescription: projectDescription
+    };
+    return this.httpClient.put(editProjectApi, body, { responseType: 'text'});
+  }
+
+  cloneProject(projectId: number){
+    const cloneProjectApi = `https://localhost:7197/api/groups/${this.groupId}/projects/${projectId}`;
+    return this.httpClient.post(cloneProjectApi, null, { responseType: 'text'});
+  }
+
+  searchProject(projectId: number):Observable<Project>{
+    const searchApi = `https://localhost:7197/api/groups/${this.groupId}/projects/${projectId}`;
+    return this.httpClient.get<Project>(searchApi);
   }
 }

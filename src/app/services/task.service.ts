@@ -29,4 +29,18 @@ export class TaskService {
     };
     return this.httpClient.post(addTasksApi, body);
   }
+
+  formatDate(dueDate: string){
+  
+   if (dueDate.includes('T')) {
+      return (dueDate);
+   }
+  
+   const datePart = dueDate.split(' ')[0];
+   const timePart = dueDate.split(' ')[1] || '00:00:00';
+   const formattedValue = `${datePart}T${timePart}`;
+  
+   return formattedValue;
+  }
+
 }

@@ -1,5 +1,5 @@
 button{
-    width: 25%
+    width: 30%
   }
 
 .add-project{
@@ -42,4 +42,64 @@ button{
     text-decoration: none;
     cursor: pointer;
   }
+
+
+  .project-status{
+    width: 10%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .task-container{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .task-content{
+    width: 25%;
+  }
+
+  .task-buttons{
+    display: flex;
+    justify-content: center;
+  }
+
+  .comment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+  }
   
+  .comment-modal {
+    top: 0;
+    z-index: 1;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    display: block;
+    position: fixed; 
+  }
+  
+  .comment-modal-content {
+    background-color: #151931;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .comment-button{
+    width: 90%;
+  }
+
+

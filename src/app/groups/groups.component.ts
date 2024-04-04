@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupService } from '../services/group.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PathService } from '../services/path.service';
+import { ToasterService } from '../services/toaster.service';
 
 export interface Group {
   groupId: number;
@@ -13,24 +15,42 @@ export interface Group {
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent implements OnInit{
   groups: Group[] = [];
   addGroup: FormGroup;
   add = false;
   submitted = false;
+  arePagesAvailable!: boolean;
+  firstPage!: boolean;
+  totalPages!: number;
+  currentPage = 1;
 
-  constructor(private service: GroupService, private router: Router, private fb: FormBuilder){
+  constructor(private service: GroupService, private router: Router, private fb: FormBuilder, private path: PathService, private toaster: ToasterService){
     this.addGroup = this.fb.group({
       groupName: new FormControl('', (Validators.required, Validators.minLength(3), Validators.maxLength(20))),
     })
   }
 
   ngOnInit(): void {
-    this.service.getGroups().subscribe(
+    this.loadPage(this.currentPage);
+    this.firstPage = true;
+  }
+
+  fetchGroups(pageNumber: number) {
+    this.service.getGroups(pageNumber, 3).subscribe(
       (response) => {
-        this.groups = response
+        this.groups = response.page;
+        this.currentPage = pageNumber;
+        this.arePagesAvailable = response.arePagesAvailable;
+        this.totalPages = response.totalPages;
+        // console.log(response);
       }
     );
+  }
+
+  loadPage(pageNumber: number){
+    this.firstPage = pageNumber <= 1;
+    this.fetchGroups(pageNumber);
   }
 
   gotoProjects(groupId: number){
@@ -47,12 +67,14 @@ export class GroupsComponent implements OnInit {
 
   addGroups(form: FormGroup){
     this.service.addGroup(form.value.groupName).subscribe(
-      response => {console.log(response);
-      this.service.getGroups().subscribe(
-        (updatedGroups) => {
-          this.groups = updatedGroups;
-        }
-      );
+      () => 
+      {
+        this.toaster.toasterSuccess('Group added!');
+        this.service.getGroups(this.totalPages, 3).subscribe(
+          (updatedGroups) => {
+            this.groups = updatedGroups.page;
+          }
+        );
       }
     );
     this.submitted = true;

@@ -8,11 +8,14 @@
       <a routerLink="/signup">Signup</a>
     </ng-container>
     <ng-container  *ngIf="service.IsLoggedIn()">
-      <a routerLink="/login" (click)="service.logout()">Logout</a>
-      <a routerLink="/groups">Groups</a>  
+      <a class="logout" routerLink="/login" (click)="service.logout()">Logout</a>
+      <app-ng-dynamic-breadcrumb [bgColor]="'#3d3f5b'" [fontColor]="'#84725e'" [lastLinkColor]="'#000'" [fontSize]="'16px'"></app-ng-dynamic-breadcrumb>
     </ng-container>
   </div>
 </nav>
 <app-spinner></app-spinner>
+
 <router-outlet></router-outlet>
+
+ 
 

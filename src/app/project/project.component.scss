@@ -1,5 +1,5 @@
 button{
-    width: 25%
+    width: 18%;
   }
 
 .add-project{
@@ -42,4 +42,15 @@ button{
     text-decoration: none;
     cursor: pointer;
   }
+
+  .taskbutton{
+    width: 50%;
+  }
   
+  .search{
+    width: 70%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin: 0 auto;
+  }

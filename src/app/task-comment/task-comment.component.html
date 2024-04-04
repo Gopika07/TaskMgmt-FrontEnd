@@ -1,0 +1,15 @@
+
+<div *ngIf="empty" class="noDisplay"><h2>No comments to display!</h2></div>
+
+<table *ngIf="!empty">
+  <thead>
+    <tr>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comment of comments">
+      <td>{{ comment.commentText }}</td>
+    </tr>
+  </tbody>
+</table>

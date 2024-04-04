@@ -1,0 +1,24 @@
+<div class="container">
+  <table>
+      <thead>
+        <tr>
+          <th>Task Status Id</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let status of taskStat">
+          <th>{{ status.projectTaskStatusId }}</th>
+          <th [style.background-color]="status.statusColor">{{ status.statusText }}</th>
+        </tr>
+      </tbody>
+  </table>
+
+  <form [formGroup]="taskStatus" (ngSubmit)="addTaskStatus(taskStatus)">
+      <label for="statusText">Status Text:</label>
+      <input formControlName="statusText" for="taskstatus" type="text">
+      <label>Status Color:</label>
+      <input class="statusColor" formControlName="statusColor" for="taskstatus" type="color">
+      <button type="submit">Submit</button>
+  </form>
+</div>

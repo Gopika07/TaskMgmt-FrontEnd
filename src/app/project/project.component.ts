@@ -106,7 +106,6 @@ deleteProject(projectId: number){
   this.service.deleteProject(projectId).subscribe(
     () => {
       this.toaster.toasterSuccess('Project deleted!');
-      this.toaster.toasterFailure('nice');
       this.updateProjectAfterOperation();
     },
     (error) => {
@@ -150,7 +149,6 @@ cloneProject(projectId: number){
   this.service.cloneProject(projectId).subscribe(
     () => {
       this.toaster.toasterSuccess('Project cloned!');
-      console.log('yes');
       this.service.getProjects(this.groupId, this.totalPages, 10).subscribe(
         (updatedProjects) => {
           this.projects = updatedProjects.page;

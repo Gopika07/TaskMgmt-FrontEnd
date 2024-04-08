@@ -1,4 +1,0 @@
-show all errors in toaster
-search box
-caching
-common pageination

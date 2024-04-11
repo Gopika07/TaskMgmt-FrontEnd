@@ -46,8 +46,6 @@ export class ProjectComponent implements OnInit{
     this.getProject(this.currentPage);
     this.firstPage = true;
     this.totalPages = 1;
-    // const url = this.router.url.substring(this.router.url.lastIndexOf('/')+1);
-    // console.log("url " + url);
   }
   
 getProject(pageIndex: number) {
@@ -133,8 +131,8 @@ getEditProject(form: FormGroup){
 
 updateProjectAfterOperation(){
   this.service.getProjects(this.groupId, this.totalPages, 10).subscribe(
-    (updatedProjects) => {
-      this.projects = updatedProjects.page;
+    (response) => {
+      this.projects = response.page;
     }
   );
 }
@@ -157,19 +155,5 @@ cloneProject(projectId: number){
     }
   )
 }
-
-// searchProject(projectId: string){
-//   const Id = Number(projectId);
-//   console.l  og(projectId);
-//   console.log(Id);
-//   this.service.searchProject(Id).subscribe(
-//     (response: Project) => {
-//         this.projects = [];
-//         this.projects[0] = response; 
-//         console.log(response);
-//         console.log(this.projects);
-//       }
-//   )
-// }
 
 }

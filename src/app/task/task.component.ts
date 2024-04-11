@@ -52,7 +52,7 @@ export class TaskComponent implements OnInit {
       this.service.getTasks(this.groupId, this.projectId).subscribe(
         (response) =>
         {
-          console.log(response);
+          // console.log(response);
           if(response.length === 0){
             this.empty = true;
           }
@@ -63,7 +63,7 @@ export class TaskComponent implements OnInit {
 
     this.status.getProjectTaskStatus(this.projectId, this.groupId).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.taskStatus = response;
       }
     )
@@ -110,7 +110,7 @@ export class TaskComponent implements OnInit {
   }
 
   Addcomment(commentText: string){
-    console.log(this.taskId);
+    // console.log(this.taskId);
     this.commentService.addComment(this.taskId, this.groupId, this.projectId, commentText).subscribe(
       ()=>{
         alert('Comment added!');

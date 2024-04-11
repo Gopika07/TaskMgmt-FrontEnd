@@ -14,5 +14,6 @@ export class TokenService {
 
   setToken(token: string){
     localStorage.setItem('Bearer', token);
+    
   }
 }
